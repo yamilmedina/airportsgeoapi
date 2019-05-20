@@ -8,3 +8,15 @@ services:
       MONGO_INITDB_ROOT_USERNAME: ${DB_USERNAME}
       MONGO_INITDB_ROOT_PASSWORD: ${DB_PASS}
       MONGO_INITDB_DATABASE: ${DB_NAME}
+  app:
+    build:
+      context: ./
+      dockerfile: ./docker/app/Dockerfile
+    restart: always
+    environment:
+      SPRING_PROFILES_ACTIVE: ${SPRING_PROFILE}
+    ports:
+      - '8080:8080'
+      - '5005:5005'
+    depends_on:
+      - db
