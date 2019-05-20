@@ -1,4 +1,5 @@
 *.env
+/bin/
 HELP.md
 .gradle
 /build/
