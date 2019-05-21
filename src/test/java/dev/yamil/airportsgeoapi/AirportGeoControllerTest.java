@@ -28,8 +28,7 @@ public class AirportGeoControllerTest {
 
     @Test
     public void returnStatusOkAndDataFromRepository() {
-        var expectedAirports = stubAirportsResponse();
-        when(airportsRepository.findAll()).thenReturn(expectedAirports);
+        when(airportsRepository.findAll()).thenReturn(stubAirportsResponse());
 
         var responseEntity = airportGeoController.fetchAllAirports();
 
@@ -37,8 +36,22 @@ public class AirportGeoControllerTest {
         assertThat(responseEntity.getBody().size(), is(2));
     }
 
+    @Test
+    public void returnStatusOkAndDataForSpecificAirportByIata() {
+        var madridIataCode = "MAD";
+        when(airportsRepository.findAirportByIata(madridIataCode))
+                .thenReturn(stubAirportsResponse().stream()
+                        .filter(a -> madridIataCode.equalsIgnoreCase(a.getIata())).findFirst().get()
+                );
+
+        var airportResponseEntity = airportGeoController.fetchAirportInfoByIataCode(madridIataCode);
+
+        assertThat(airportResponseEntity.getStatusCode(), is(HttpStatus.OK));
+        assertThat(airportResponseEntity.getBody().getIata(), is(madridIataCode));
+    }
+
     @Test(expected = IllegalArgumentException.class)
-    public void returnsStatusCode400AndEmptyDataWhenInvalidParams() {
+    public void returnStatusCode400AndEmptyDataWhenInvalidParams() {
         airportGeoController.fetchAirportInfoByIataCode("a");
     }
 
