@@ -27,7 +27,7 @@ public class AirportGeoControllerTest {
     }
 
     @Test
-    public void shouldReturnStatusOkAndDataFromRepository() {
+    public void returnStatusOkAndDataFromRepository() {
         var expectedAirports = stubAirportsResponse();
         when(airportsRepository.findAll()).thenReturn(expectedAirports);
 
@@ -35,6 +35,11 @@ public class AirportGeoControllerTest {
 
         assertThat(responseEntity.getStatusCode(), is(HttpStatus.OK));
         assertThat(responseEntity.getBody().size(), is(2));
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void returnsStatusCode400AndEmptyDataWhenInvalidParams() {
+        airportGeoController.fetchAirportInfoByIataCode("a");
     }
 
     private List<Airport> stubAirportsResponse() {

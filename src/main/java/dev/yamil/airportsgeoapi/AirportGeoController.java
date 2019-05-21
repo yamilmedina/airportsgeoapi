@@ -30,6 +30,10 @@ class AirportGeoController {
 
     @GetMapping(value = "/{iataCode}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Airport> fetchAirportInfoByIataCode(@PathVariable String iataCode) {
+        if (iataCode.isBlank() || iataCode.length() != 3) {
+            throw new IllegalArgumentException("Invalid request");
+        }
+
         var airport = airportsRepository.findAirportByIata(iataCode);
 
         return ResponseEntity.ok(airport);
