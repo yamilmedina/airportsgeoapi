@@ -24,7 +24,6 @@ class AirportGeoController {
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<Airport>> fetchAllAirports() {
         var airports = airportsRepository.findAll();
-
         return ResponseEntity.ok(airports);
     }
 
@@ -35,9 +34,7 @@ class AirportGeoController {
         }
 
         var airport = airportsRepository.findAirportByIata(iataCode);
-
         return ResponseEntity.ok(airport);
     }
-
 
 }
