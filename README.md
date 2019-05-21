@@ -1,5 +1,6 @@
 # Airports Geo API
-[![CircleCI](https://circleci.com/gh/yamilmedina/airportsgeoapi.svg?style=svg)](https://circleci.com/gh/yamilmedina/airportsgeoapi)
+![java11](https://img.shields.io/badge/java-11-green.svg)
+[![CircleCI](https://circleci.com/gh/yamilmedina/airportsgeoapi.svg?style=shield)](https://circleci.com/gh/yamilmedina/airportsgeoapi)
 
 `Airports Geo API` is a public api to serve airports informations based on IATA codes.
 This service is based on the data gathered from the GADB project ["The Global Airport Database"][1]. 
@@ -8,7 +9,7 @@ This service is based on the data gathered from the GADB project ["The Global Ai
 
 ## Usage
 
-FIXME
+WIP
 
 ## License
 
